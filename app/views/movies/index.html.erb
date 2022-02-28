@@ -3,11 +3,20 @@
 
 <%#  Part 1: Start here... %>
 <style>
-  
   .hilite {
     background-color:yellow;
   }
 </style>
+
+
+<%= form_tag movies_path, :method => :get do
+  Include:
+  <% @all_ratings.each do |rating| %>
+    <%= rating %>
+    <%= check_box_tag "ratings[#{rating}]" %>
+  <% end %>
+  <%= submit_tag 'Refresh', :class => 'btn btn-primary' %>
+<% end %>
 
 <table class="table table-striped col-md-12" id="movies">
   <thead>
