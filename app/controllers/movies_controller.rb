@@ -44,4 +44,9 @@ class MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date)
   end
+  
+  if params[:sort_key] == 'title'
+    @movie = Movie.order(@title).all
+  end
+    
 end
