@@ -8,11 +8,11 @@ class MoviesController < ApplicationController
 
   def index
    
-   @movies = Movie.all
+    @movies = Movie.all
    
     if params[:sort_key] == 'title'
       #@movie = Movie.order('title').all
-      @movie = Movie.order(@sort_key).all
+      @movies = Movie.order('title').all
     else
        @movies = Movie.all
   end
