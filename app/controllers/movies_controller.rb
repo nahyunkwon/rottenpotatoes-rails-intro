@@ -7,7 +7,13 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+   
+    if params[:sort_key] == 'title'
+      #@movie = Movie.order('title').all
+      @movie = Movie.order(@sort_key).all
+    else
+       @movies = Movie.all
+  end
   end
 
   def new
@@ -44,10 +50,6 @@ class MoviesController < ApplicationController
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date)
   end
-  
-  if params[:sort_key] == 'title'
-    #@movie = Movie.order('title').all
-    @movie = Movie.order(@sort_key).all
-  end
+
     
 end
