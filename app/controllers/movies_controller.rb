@@ -47,7 +47,7 @@ class MoviesController < ApplicationController
   
   if params[:sort_key] == 'title'
     #@movie = Movie.order('title').all
-    @movie = Movie.order(:sort_key).all
+    @movie = Movie.order(@sort_key).all
   end
     
 end
