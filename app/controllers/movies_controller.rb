@@ -55,6 +55,7 @@ class MoviesController < ApplicationController
   # This helps make clear which methods respond to requests, and which ones do not.
   def movie_params
     params.require(:movie).permit(:title, :rating, :description, :release_date, :sort_key)
+    @sort_key = ''
   end
 
     
