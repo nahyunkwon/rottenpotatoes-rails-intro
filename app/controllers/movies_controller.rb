@@ -31,12 +31,8 @@ class MoviesController < ApplicationController
       @movies = Movie.all
     else
       logger.info params[:ratings].keys
-      @movies = Movie.where(rating: params[:ratings].keys)
-      #@movies = Movie.with_ratings(params[:ratings].keys)
+      @movies = Movie.with_ratings(params[:ratings].keys)
     end
-    
-    #@movies = Movie.with_ratings(params[:ratings]&.keys)
-    
     
     
   end
