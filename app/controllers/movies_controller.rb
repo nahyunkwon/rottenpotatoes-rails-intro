@@ -15,7 +15,8 @@ class MoviesController < ApplicationController
     if params[:ratings].nil?
       @movies = Movie.all
     else
-      @movies = Movie.with_ratings(params[:ratings]&.keys)
+      logger.info params[:ratings].keys
+      @movies = Movie.with_ratings(params[:ratings].keys)
     end
     
     #@movies = Movie.with_ratings(params[:ratings]&.keys)
