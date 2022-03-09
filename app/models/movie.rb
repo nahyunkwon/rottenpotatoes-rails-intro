@@ -1,9 +1,9 @@
 class Movie < ActiveRecord::Base
     def self.all_ratings
-        return Movie.select(:rating).map(&:rating).uniq
+        ['G', 'PG', 'PG-13', 'R']
     end
     
     def self.with_ratings(ratings)
-        return Movie.where(rating: ratings)
+        Movie.where(rating: ratings)
     end
 end

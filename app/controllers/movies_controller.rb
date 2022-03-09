@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
     puts(params[:ratings])
     
     # have only selected ratings
-    if params[:ratings] == nil
+    if params[:ratings].length() == 0
       @movies = Movie.all
     else
       @movies = Movie.with_ratings(params[:ratings]&.keys)
