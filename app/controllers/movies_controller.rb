@@ -9,6 +9,8 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     
+    puts(params[:ratings])
+    
     # have only selected ratings
     if params[:ratings] == nil
       @movies = Movie.all
