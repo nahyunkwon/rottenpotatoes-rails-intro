@@ -10,8 +10,7 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     
     # have only selected ratings
-    if params[:ratings]
-      @movies = Movie.select(:ratings).all
+    @movies = Movie.with_ratings(params[:ratings].keys)
     
     # sort by title / release date
     if params[:sort_key] == 'title'
