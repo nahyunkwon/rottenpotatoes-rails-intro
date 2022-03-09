@@ -8,6 +8,8 @@ class MoviesController < ApplicationController
 
   def index
     
+     @all_ratings = Movie.all_ratings
+    
     # sort by title / release date
     if params[:sort_key] == 'title'
       @movies = Movie.order('title').all
@@ -20,9 +22,6 @@ class MoviesController < ApplicationController
       @title_header = ""
       @release_date_header = ""
     end
-    
-    
-    @all_ratings = Movie.all_ratings
     
     logger.info params[:ratings]
     
