@@ -6,7 +6,7 @@ class Movie < ActiveRecord::Base
     def self.with_ratings (ratings)
         Movie.where(rating: ratings)
         
-        if ratings.length() == 0
+        if ratings == nil
             Movie.all
         end
     end
