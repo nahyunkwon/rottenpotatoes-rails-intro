@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     
-    puts(params[:ratings])
+    logger.info params[:ratings]
     
     # have only selected ratings
     if params[:ratings].nil?
@@ -17,6 +17,8 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.with_ratings(params[:ratings]&.keys)
     end
+    
+    #@movies = Movie.with_ratings(params[:ratings]&.keys)
     
     # sort by title / release date
     if params[:sort_key] == 'title'
