@@ -10,14 +10,19 @@ class MoviesController < ApplicationController
     flash.keep
     
     @all_ratings = Movie.all_ratings
-     
+    
+    session[:ratings] = params[:ratings]
+    session[:sort_key] = params[:sort_key]
+    logger.info session[:ratings]
+    logger.info session[:sort_key]
     
     #redirect_to 
     
     # sort by title / release date
-    if params[:sort_key] == 'title'
+    if params[:sort_key] == 'title' or session[:sort_key] == 'title'
       @movies = Movie.order('title').all
       @title_header = "hilite"
+      redirect_to movies_path(@movies)
     elsif params[:sort_key] == 'release_date'
       @movies = Movie.order('release_date').all
       @release_date_header = "hilite"
@@ -36,9 +41,6 @@ class MoviesController < ApplicationController
       #logger.info params[:ratings].keys
       @movies = Movie.with_ratings(params[:ratings].keys)
     end
-    
-    session[:ratings] = params[:ratings]
-    logger.info session[:ratings]
     
   end
 
