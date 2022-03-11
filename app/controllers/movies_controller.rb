@@ -27,16 +27,18 @@ class MoviesController < ApplicationController
       @release_date_header = ""
     end
     
-    logger.info params[:ratings]
+    #logger.info params[:ratings]
     
     # have only selected ratings
     if params[:ratings].nil?
       @movies = Movie.all
     else
-      logger.info params[:ratings].keys
+      #logger.info params[:ratings].keys
       @movies = Movie.with_ratings(params[:ratings].keys)
     end
     
+    session[:ratings] = params[:ratings]
+    logger.info session[:ratings]
     
   end
 
