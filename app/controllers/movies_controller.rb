@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #flash.keep
+    flash.keep
     
     @all_ratings = Movie.all_ratings
      
@@ -35,14 +35,6 @@ class MoviesController < ApplicationController
     else
       logger.info params[:ratings].keys
       @movies = Movie.with_ratings(params[:ratings].keys)
-    end
-    
-    
-    if params[:sort_key].present?
-      session[:sort_key] = params[:sort_key]
-    end
-    if params[:ratings].present?
-      session[:ratings] = params[:ratings]
     end
     
     
