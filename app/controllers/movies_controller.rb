@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    flash.keep
+    #flash.keep
     
     @all_ratings = Movie.all_ratings
      
