@@ -22,6 +22,8 @@ class MoviesController < ApplicationController
     if params[:sort_key] == 'title' or session[:sort_key] == 'title'
       @movies = Movie.order('title').all
       @title_header = "hilite"
+      flash[:sort_key] = 'title'
+      flash[:title_header] = "hilite"
       redirect_to movies_path(@movies)
     elsif params[:sort_key] == 'release_date'
       @movies = Movie.order('release_date').all
