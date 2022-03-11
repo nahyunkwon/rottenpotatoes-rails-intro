@@ -7,8 +7,16 @@ class MoviesController < ApplicationController
   end
 
   def index
+    flash.keep
     
-     @all_ratings = Movie.all_ratings
+    @all_ratings = Movie.all_ratings
+     
+    if params[:sort_key].present?
+      session[:sort_key] = params[:sort_key]
+    end
+    if params[:ratings].present?
+      session[:ratings] = params[:ratings]
+    end
     
     # sort by title / release date
     if params[:sort_key] == 'title'
