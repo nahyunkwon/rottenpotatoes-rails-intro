@@ -14,9 +14,12 @@ class MoviesController < ApplicationController
     
     # have only selected ratings
     if params[:ratings].nil?
-      @selected_ratings = @all_ratings
+      if session[:ratings].nil?
+        @selected_ratings = @all_ratings
+      else
+        @selected_ratings = session[:ratings]
+      end
     else # ratings
-      #logger.info params[:ratings].keys
       @selected_ratings = params[:ratings].keys
     end
     
@@ -27,8 +30,11 @@ class MoviesController < ApplicationController
     elsif params[:sort_key] == 'release_date'
       @movies = Movie.order('release_date').with_ratings(@selected_ratings)
       @release_date_header = "hilite"
-    else
-      @movies = Movie.with_ratings(@selected_ratings)
+    else # nil
+      if session[:sort_key].nil?
+        @movies = Movie.with_ratings(@selected_ratings)
+      else
+        @movies = Movie.order(session[:sort_key]).with_ratings(@selected_ratings)
       @title_header = ""
       @release_date_header = ""
     end
