@@ -43,7 +43,8 @@ class MoviesController < ApplicationController
     
     if params[:sort_key] == 'title' || session[:sort_key] == 'title'
       @title_header = "hilite"
-    elsif params[:sort_key] == 'release_date' || session[:sort_key] == 'release_date'
+    end
+    if params[:sort_key] == 'release_date' || session[:sort_key] == 'release_date'
       @release_date_header = "hilite"
     end
     
