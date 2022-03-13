@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
       @release_date_header = ""
     end
     
-    if session[:sort_key].present? || session[:ratings].present?
+    if !session[:sort_key].nil? || !session[:ratings].nil?
       redirect_to movies_path(:ratings => session[:ratings], :sort_key => session[:sort_key])
     end
     
