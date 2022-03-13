@@ -26,19 +26,25 @@ class MoviesController < ApplicationController
     # sort by title / release date
     if params[:sort_key] == 'title'
       @movies = Movie.order('title').with_ratings(@selected_ratings)
-      @title_header = "hilite"
+      #@title_header = "hilite"
     elsif params[:sort_key] == 'release_date'
       @movies = Movie.order('release_date').with_ratings(@selected_ratings)
-      @release_date_header = "hilite"
+      #@release_date_header = "hilite"
     else # nil
       if session[:sort_key].nil?
         @movies = Movie.with_ratings(@selected_ratings)
+        #@title_header = ""
+       # @release_date_header = ""
       else
-        @movies = Movie.order(session[:sort_key].keys).with_ratings(@selected_ratings)
+        @movies = Movie.order(session[:sort_key]).with_ratings(@selected_ratings)
       end
-      @title_header = ""
-      @release_date_header = ""
+      
     end
+    
+    if params[:sort_key] == 'title' || session[:sort_key] == 'title'
+      @title_header = "hilite"
+    elsif params[:sort_key] == 'release_date' || session[:sort_key] == 'release_date'
+      @release_date_header = "hilite"
     
     if !params[:sort_key].nil?
       session[:sort_key] = params[:sort_key]
