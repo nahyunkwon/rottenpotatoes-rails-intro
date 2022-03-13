@@ -24,13 +24,13 @@ class MoviesController < ApplicationController
     
     # sort by title / release date
     if params[:sort_key] == 'title'
-      @movies = Movie.order('title').with_ratings(selected_ratings)
+      @movies = Movie.order('title').with_ratings(@selected_ratings)
       @title_header = "hilite"
     elsif params[:sort_key] == 'release_date'
-      @movies = Movie.order('release_date').with_ratings(selected_ratings)
+      @movies = Movie.order('release_date').with_ratings(@selected_ratings)
       @release_date_header = "hilite"
     else
-      @movies = Movie.with_ratings(selected_ratings)
+      @movies = Movie.with_ratings(@selected_ratings)
       @title_header = ""
       @release_date_header = ""
     end
