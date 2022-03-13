@@ -19,10 +19,10 @@ class MoviesController < ApplicationController
     #redirect_to 
     
     # sort by title / release date
-    if params[:sort_key] == 'title' or session[:sort_key] == 'title'
+    if params[:sort_key] == 'title'# or session[:sort_key] == 'title'
       @movies = Movie.order('title').all
       @title_header = "hilite"
-    elsif params[:sort_key] == 'release_date' or session[:sort_key] == 'release_date'
+    elsif params[:sort_key] == 'release_date'# or session[:sort_key] == 'release_date'
       @movies = Movie.order('release_date').all
       @release_date_header = "hilite"
     else
