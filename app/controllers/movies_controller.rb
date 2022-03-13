@@ -35,7 +35,7 @@ class MoviesController < ApplicationController
     
     if session[:sort_key].present? || session[:ratings].present?
       redirect_to movies_path(:ratings => session[:ratings], :sort_key => session[:sort_key])
-    
+    end
     
     session[:sort_key] = params[:sort_key]
     session[:ratings] = params[:ratings]
