@@ -45,6 +45,7 @@ class MoviesController < ApplicationController
       @title_header = "hilite"
     elsif params[:sort_key] == 'release_date' || session[:sort_key] == 'release_date'
       @release_date_header = "hilite"
+    end
     
     if !params[:sort_key].nil?
       session[:sort_key] = params[:sort_key]
