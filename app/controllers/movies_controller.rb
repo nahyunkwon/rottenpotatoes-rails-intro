@@ -11,10 +11,10 @@ class MoviesController < ApplicationController
     
     @all_ratings = Movie.all_ratings
     
-    session[:ratings] = params[:ratings]
-    session[:sort_key] = params[:sort_key]
-    logger.info session[:ratings]
-    logger.info session[:sort_key]
+    #session[:ratings] = params[:ratings]
+    #session[:sort_key] = params[:sort_key]
+    #logger.info session[:ratings]
+    #logger.info session[:sort_key]
     
     #redirect_to 
     
