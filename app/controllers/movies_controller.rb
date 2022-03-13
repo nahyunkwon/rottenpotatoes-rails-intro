@@ -7,8 +7,20 @@ class MoviesController < ApplicationController
   end
 
   def index
-    
+    flash.keep
      @all_ratings = Movie.all_ratings
+    
+    
+    
+    logger.info params[:ratings]
+    
+    # have only selected ratings
+    if params[:ratings].nil?
+      @movies = Movie.all
+    else
+      logger.info params[:ratings].keys
+      @movies = Movie.with_ratings(params[:ratings].keys)
+    end
     
     # sort by title / release date
     if params[:sort_key] == 'title'
@@ -21,16 +33,6 @@ class MoviesController < ApplicationController
       @movies = Movie.all
       @title_header = ""
       @release_date_header = ""
-    end
-    
-    logger.info params[:ratings]
-    
-    # have only selected ratings
-    if params[:ratings].nil?
-      @movies = Movie.all
-    else
-      logger.info params[:ratings].keys
-      @movies = Movie.with_ratings(params[:ratings].keys)
     end
     
     
