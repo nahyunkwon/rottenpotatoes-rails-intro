@@ -34,7 +34,7 @@ class MoviesController < ApplicationController
       if session[:sort_key].nil?
         @movies = Movie.with_ratings(@selected_ratings)
       else
-        @movies = Movie.order(@selected_ratings).with_ratings(@selected_ratings)
+        @movies = Movie.order(session[:sort_key].keys).with_ratings(@selected_ratings)
       end
       @title_header = ""
       @release_date_header = ""
