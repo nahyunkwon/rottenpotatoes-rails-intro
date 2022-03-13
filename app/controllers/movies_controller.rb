@@ -34,20 +34,10 @@ class MoviesController < ApplicationController
       if session[:sort_key].nil?
         @movies = Movie.with_ratings(@selected_ratings)
       else
-        @movies = Movie.order(session[:sort_key]).with_ratings(@selected_ratings)
+        @movies = Movie.order(@selected_ratings).with_ratings(@selected_ratings)
       end
       @title_header = ""
       @release_date_header = ""
-    end
-    
-    if !session[:sort_key].nil? && params[:sort_key].nil?
-      #redirect_to movies_path(:sort_key => session[:sort_key])
-      return
-    elsif !session[:ratings].nil? && params[:ratings].nil?
-      #redirect_to movies_path(:ratings => session[:ratings])
-      return
-    #elsif !session[:sort_key].nil? && !session[:ratings].nil?
-    #  redirect_to movies_path(:sort_key => session[:sort_key], :ratings => session[:ratings])
     end
     
     if !params[:sort_key].nil?
