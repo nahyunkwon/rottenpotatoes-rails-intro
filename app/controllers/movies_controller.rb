@@ -43,8 +43,10 @@ class MoviesController < ApplicationController
     
     if !params[:sort_key].nil?
       session[:sort_key] = params[:sort_key]
+    end
     if !params[:ratings].nil?
       session[:ratings] = params[:ratings]
+    end
         
   end
 
