@@ -34,7 +34,11 @@ class MoviesController < ApplicationController
     end
     
     if !session[:sort_key].nil? && params[:sort_key].nil?
-      redirect_to movies_path(:ratings => session[:ratings], :sort_key => session[:sort_key])
+      redirect_to movies_path(:sort_key => session[:sort_key])
+    elsif !session[:ratings].nil? && params[:ratings].nil?
+      redirect_to movies_path(:ratings => session[:ratings])
+    elsif !session[:sort_key].nil? && !session[:ratings].nil? && params[:sort_key].nil? && params[:ratings].nil?
+      redirect_to movies_path(:sort_key => session[:sort_key], :ratings => session[:ratings])
     end
     
     session[:sort_key] = params[:sort_key]
