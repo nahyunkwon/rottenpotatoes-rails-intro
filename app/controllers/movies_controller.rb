@@ -19,10 +19,12 @@ class MoviesController < ApplicationController
     #redirect_to 
     
     # sort by title / release date
-    if params[:sort_key] == 'title'# or session[:sort_key] == 'title'
+    if params[:sort_key] == 'title'
+      # or session[:sort_key] == 'title'
       @movies = Movie.order('title').all
       @title_header = "hilite"
-    elsif params[:sort_key] == 'release_date'# or session[:sort_key] == 'release_date'
+    elsif params[:sort_key] == 'release_date'
+      # or session[:sort_key] == 'release_date'
       @movies = Movie.order('release_date').all
       @release_date_header = "hilite"
     else
@@ -52,7 +54,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."
-    redirect_to movies_path(@movies, :sort_key => session[:sort_key], :ratings => session[:ratings])
+    redirect_to movies_path(@movies, :sort_key => session[:sort_key])
   end
 
   def edit
@@ -63,7 +65,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie.update_attributes!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully updated."
-    redirect_to movies_path(@movies, :sort_key => session[:sort_key], :ratings => session[:ratings])
+    redirect_to movie_path(@movie)
   end
 
   def destroy
