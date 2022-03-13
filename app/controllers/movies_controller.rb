@@ -15,11 +15,9 @@ class MoviesController < ApplicationController
     # have only selected ratings
     if params[:ratings].nil?
       @selected_ratings = @all_ratings
-        #@movies = Movie.all
     else # ratings
       #logger.info params[:ratings].keys
       @selected_ratings = params[:ratings].keys
-      #@movies = Movie.with_ratings(params[:ratings].keys)
     end
     
     # sort by title / release date
@@ -34,6 +32,9 @@ class MoviesController < ApplicationController
       @title_header = ""
       @release_date_header = ""
     end
+    
+    if session[:sort_key].present? || session[:ratings].present?
+      redirect_to movies_path(:ratings => session[:ratings], :sort_key => session[:sort_key])
     
     
     session[:sort_key] = params[:sort_key]
