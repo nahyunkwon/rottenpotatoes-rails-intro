@@ -31,6 +31,8 @@ class MoviesController < ApplicationController
       @release_date_header = ""
     end
     
+    #redirect_to movies_path(@movies, :sort_key => session[:sort_key])
+    
     #logger.info params[:ratings]
     
     # have only selected ratings
@@ -50,7 +52,7 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."
-    redirect_to movies_path
+    redirect_to movies_path(@movies, :sort_key => session[:sort_key], :ratings => session[:ratings])
   end
 
   def edit
@@ -61,7 +63,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find params[:id]
     @movie.update_attributes!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully updated."
-    redirect_to movie_path(@movie)
+    redirect_to movies_path(@movies, :sort_key => session[:sort_key], :ratings => session[:ratings])
   end
 
   def destroy
