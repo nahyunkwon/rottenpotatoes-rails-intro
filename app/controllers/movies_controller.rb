@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #flash.keep
+    flash.keep
     @all_ratings = Movie.all_ratings
     
     logger.info params[:ratings]
@@ -34,10 +34,10 @@ class MoviesController < ApplicationController
     end
     
     if !session[:sort_key].nil? && params[:sort_key].nil?
-      redirect_to movies_path(:sort_key => session[:sort_key])
+      #redirect_to movies_path(:sort_key => session[:sort_key])
       return
     elsif !session[:ratings].nil? && params[:ratings].nil?
-      redirect_to movies_path(:ratings => session[:ratings])
+      #redirect_to movies_path(:ratings => session[:ratings])
       return
     #elsif !session[:sort_key].nil? && !session[:ratings].nil?
     #  redirect_to movies_path(:sort_key => session[:sort_key], :ratings => session[:ratings])
