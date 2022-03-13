@@ -8,34 +8,37 @@ class MoviesController < ApplicationController
 
   def index
     flash.keep
-     @all_ratings = Movie.all_ratings
-    
-    
+    @all_ratings = Movie.all_ratings
     
     logger.info params[:ratings]
     
     # have only selected ratings
     if params[:ratings].nil?
-      @movies = Movie.all
-    else
-      logger.info params[:ratings].keys
-      @movies = Movie.with_ratings(params[:ratings].keys)
+      @selected_ratings = @all_ratings
+        #@movies = Movie.all
+    else # ratings
+      #logger.info params[:ratings].keys
+      @selected_ratings = params[:ratings].keys
+      #@movies = Movie.with_ratings(params[:ratings].keys)
     end
     
     # sort by title / release date
     if params[:sort_key] == 'title'
-      @movies = Movie.order('title').all
+      @movies = Movie.order('title').with_ratings(selected_ratings)
       @title_header = "hilite"
     elsif params[:sort_key] == 'release_date'
-      @movies = Movie.order('release_date').all
+      @movies = Movie.order('release_date').with_ratings(selected_ratings)
       @release_date_header = "hilite"
     else
-      @movies = Movie.all
+      @movies = Movie.with_ratings(selected_ratings)
       @title_header = ""
       @release_date_header = ""
     end
     
     
+    session[:sort_key] = params[:sort_key]
+    session[:ratings] = params[:ratings]
+        
   end
 
   def new
