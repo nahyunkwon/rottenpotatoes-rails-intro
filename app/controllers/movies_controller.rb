@@ -35,6 +35,7 @@ class MoviesController < ApplicationController
         @movies = Movie.with_ratings(@selected_ratings)
       else
         @movies = Movie.order(session[:sort_key]).with_ratings(@selected_ratings)
+      end
       @title_header = ""
       @release_date_header = ""
     end
