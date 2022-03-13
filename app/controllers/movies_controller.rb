@@ -7,24 +7,14 @@ class MoviesController < ApplicationController
   end
 
   def index
-    #flash.keep
     
-    @all_ratings = Movie.all_ratings
-    
-    #session[:ratings] = params[:ratings]
-    #session[:sort_key] = params[:sort_key]
-    #logger.info session[:ratings]
-    #logger.info session[:sort_key]
-    
-    #redirect_to 
+     @all_ratings = Movie.all_ratings
     
     # sort by title / release date
     if params[:sort_key] == 'title'
-      # or session[:sort_key] == 'title'
       @movies = Movie.order('title').all
       @title_header = "hilite"
     elsif params[:sort_key] == 'release_date'
-      # or session[:sort_key] == 'release_date'
       @movies = Movie.order('release_date').all
       @release_date_header = "hilite"
     else
@@ -33,17 +23,16 @@ class MoviesController < ApplicationController
       @release_date_header = ""
     end
     
-    #redirect_to movies_path(@movies, :sort_key => session[:sort_key])
-    
-    #logger.info params[:ratings]
+    logger.info params[:ratings]
     
     # have only selected ratings
     if params[:ratings].nil?
       @movies = Movie.all
     else
-      #logger.info params[:ratings].keys
+      logger.info params[:ratings].keys
       @movies = Movie.with_ratings(params[:ratings].keys)
     end
+    
     
   end
 
